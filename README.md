@@ -1,6 +1,7 @@
 # Marmiton
 Projet Ecole : refaire marmiton 
 
+<<<<<<< HEAD
 -------------------------------
 PREMIERE ETAPE :
 -------------------------------
@@ -37,5 +38,14 @@ chemain et command pour le crée ==> sudo vi /private/etc/apache2/other/marmiton
 Pour Accedez a la page d'accueil l'url : http://marmiton.local/accueil/index
 Pour Accedez a la page Recette l'url : http://marmiton.local/recette/index
                                             /host       /Controller/ Action
+=======
+source :
+
+MVC Archi tuto => https://www.grafikart.fr/tutoriels/php/mvc-model-vue-controller-php-132
+Php objet MVC => https://www.grafikart.fr/formations/programmation-objet-php
+
+
+
+>>>>>>> 949790b83fa557742ca71a35f7c9fcf27471b675
 
 
