@@ -1,2 +1,11 @@
 RewriteEngine on 
-RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1
+#RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1&param=$2
+
+# controller/index :
+RewriteRule ^([a-zA-Z0-9\-\_]+)$   index.php?controller=$1 [L]
+
+# controller/action :
+RewriteRule ^([a-zA-Z0-9\-\_]+)\/([a-zA-Z0-9\-\_]+)$   index.php?controller=$1&action=$2 [L]
+
+# controller/action/params :
+RewriteRule ^([a-zA-Z0-9\-\_]+)\/([a-zA-Z0-9\-\_]+\/([a-zA-Z0-9\-\_]+))$    index.php?controller=$1&action=$2&params=$3 [L]

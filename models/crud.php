@@ -1,7 +1,8 @@
 <?php
 
-// namespace models;
+namespace Marmiton\models;
 
+use Marmiton\Core\Model;
 /**
 * CrudModel class
 */
