@@ -4,6 +4,8 @@ namespace Marmiton\Core;
 
 use Marmiton\Tools\StringTools;
 
+use Marmiton\Core\AbstractController;
+
 class Request
 {
 
@@ -20,7 +22,6 @@ class Request
     public function dispatch()
     {
         if (isset($_GET['controller'])) {
-
             try {
                 $this->getController($_GET['controller']);
             } catch (\Exception $e) {
@@ -29,18 +30,20 @@ class Request
 
             if (isset($_GET['action'])) {
                 try {
-                    return $this->executeAction($_GET['action']);
+                 return $this->executeAction($_GET['action']);
                 } catch (\Exception $e) {
                     return $this->error404($e->getMessage());
                 }
             }
             else {
-                return $controller->defaultAction();
+                $this->error404();
+
+                return $controller->indexAction();
             }
         }
         else {
-            $controller = $this->getController('Default');
-            return $controller->defaultAction();
+            $controller = $this->getController('Accueil');
+            return $this->controller->indexAction();
         }
     }
 
@@ -64,7 +67,7 @@ class Request
             return $this->controller->$action();
         }
         else {
-            throw new \Exception("No Action Found with Name : " . $action . " For Controller with Name : " . $controller);
+            throw new \Exception("No Action Found with Name : " . $action . " For Controller with Name : " . $this->controller);
         }
     }
 

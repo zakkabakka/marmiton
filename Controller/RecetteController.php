@@ -2,15 +2,16 @@
 
 namespace Marmiton\Controller;
 
-use Marmiton\Core\Controller;
+use Marmiton\Core\AbstractController;
+use Marmiton\Core\Models;
 
-/**
-* database 
-*/
-class RecetteController extends Controller
+class RecetteController extends AbstractController
 {
-    function indexAction()
+
+    public function ajoutAction()
     {   
+        $db = Models::Connection();
+        var_dump($db);
         $this->render('recette');
     }
 
