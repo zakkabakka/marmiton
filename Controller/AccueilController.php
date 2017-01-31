@@ -2,13 +2,17 @@
 
 namespace Marmiton\Controller;
 // use Models\Crud;
-use Marmiton\Core\Controller;
+use Marmiton\Core\AbstractController;
 
 
-class AccueilController extends Controller
+class AccueilController extends AbstractController
 {
-    
-    function indexAction()
+    public function defaultAction()
+    {
+        echo "Default Example Page\n";
+    }
+
+    public function indexAction()
     {   
         $this->render('accueil');
     }
