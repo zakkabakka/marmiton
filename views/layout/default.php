@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8"/>
     <title>Titre</title>
-    <link rel="stylesheet" href="../style.css">
-    <link type="text/css" rel="stylesheet" href="../materialize/css/materialize.min.css" media="screen,projection"/>
+    <link rel="stylesheet" href="style.css">
+    <link type="text/css" rel="stylesheet" href="./materialize/css/materialize.min.css" media="screen,projection"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <header>
@@ -22,7 +22,7 @@
 </header>
 <body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="../materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="./materialize/js/materialize.min.js"></script>
 <script type="text/javascript" src="../js.js"></script>
 
 <?php echo $contente_for_layout; ?>

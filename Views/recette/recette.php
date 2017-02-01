@@ -1,3 +1,13 @@
+<script type="text/javaScript">
+    var i = 1;
+    function fAddText() {
+        var Contenu = document.getElementById('Cible').innerHTML;
+        		Contenu = Contenu + '<br/><div class="input-field col s6"><input name="quantite' + i +'" id="quantite" type="text" class="validate"><label for="quantite">Quantité</label></div>'
+        		+ '<div class="input-field col s6"><input name="ingredient' + i +'" id="ingredient" type="text" class="validate"><label for="ingredient">Ingredient</label></div>';
+        		document.getElementById('Cible').innerHTML = Contenu;
+        		i++;
+    }
+</script>
 <div class="containerPage">
     <div class="encart" align="center">
         <div class="white" style="width: 70%; margin-top: 4%; border-radius: 50px;">
@@ -8,16 +18,16 @@
     </div>
     <div class="rowpage">
         <div class="row">
-            <form class="col s12">
+            <form class="col s12" method="post">
                 <div class="row">
                     <h5>Utilisateur</h5>
                     <div class="col s12">
                         <div class="input-field inline" style="width: 40%">
-                            <input id="pseudo" type="text" class="validate">
+                            <input name="pseudo" id="pseudo" type="text" class="validate">
                             <label for="pseudo" data-error="wrong" data-success="right">pseudo</label>
                         </div>
                         <div class="input-field inline" style="width: 58%">
-                            <input id="email" type="email" class="validate">
+                            <input name="email" id="email" type="email" class="validate">
                             <label for="email" data-error="wrong" data-success="right">Email</label>
                         </div>
                     </div>
@@ -25,7 +35,7 @@
                 <h5>Votre Recette</h5>
                 <div class="row">
                     <div class="input-field col s8">
-                        <input id="name" type="text" class="validate">
+                        <input name="nom" id="name" type="text" class="validate">
                         <label for="name">Nom de la recette</label>
                     </div>
                     <div class="input-field col s4">
@@ -60,25 +70,18 @@
                         <label>Cout</label>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="Cible">
                     <div class="input-field col s6">
-                        <input id="quantite" type="text" class="validate">
+                        <input name="quantite0" id="quantite" type="text" class="validate">
                         <label for="quantite">Quantité</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="ingredient" type="text" class="validate">
+                        <input name="ingredient0" id="ingredient" type="text" class="validate">
                         <label for="ingredient">Ingredient</label>
                     </div>
-                    <div class="input-field col s6">
-                        <input id="quantite" type="text" class="validate">
-                        <label for="quantite">Quantité</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input id="ingredient" type="text" class="validate">
-                        <label for="ingredient">Ingredient</label>
-                    </div>
-                    <a class="btn-floating btn-large waves-effect waves-light right red"><i class="material-icons">add</i></a>
                 </div>
+                <a class="btn-floating btn-large waves-effect waves-light right red" onclick="fAddText()">
+                                        <i class="material-icons">add</i></a><br><br>
                 <div align="center">
                     <button class="btn waves-effect waves-light orange darken-3" type="submit" name="action">Envoyer la
                         recette
