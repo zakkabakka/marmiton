@@ -16,6 +16,7 @@ class RecetteModel extends Models
 
     public function addRecette($data) 
     {
+<<<<<<< HEAD
         $db = $this->getBD();
         // var_dump($data);
         $ingredient = [];
@@ -23,10 +24,19 @@ class RecetteModel extends Models
 
         for ($i=0; isset($_POST["ingredient". $i]); $i++) {
           array_push($ingredient, $_POST["ingredient". $i]);
+=======
+        var_dump($data);
+        $ingredient = [];
+        $quantite = [];
+        echo $_POST["quantite". 0];
+        for ($i=0; isset($_POST["ingredient". $i]); $i++) {
+        	array_push($ingredient, $_POST["ingredient". $i]);
+>>>>>>> f719cefa223b34aade393ea18012b6832d8fb945
         }
         for ($j=0; isset($_POST["quantite". $j]); $j++) {
             array_push($quantite, $_POST["quantite". $j]);
         }
+<<<<<<< HEAD
 
         //Add User First
         // if (isset($data['user']['pseudo']) && isset($data['user']['email'])) {
@@ -62,6 +72,13 @@ class RecetteModel extends Models
 
         
 
+=======
+        print_r($ingredient);
+        print_r($quantite);
+        // $db = Models::Connection();
+        // var_dump($_POST);
+        // $db->
+>>>>>>> f719cefa223b34aade393ea18012b6832d8fb945
     }
 
 
