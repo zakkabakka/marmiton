@@ -3,47 +3,21 @@
 namespace Marmiton\Form;
 
 use Marmiton\Core\AbstractForm;
+use Marmiton\Form\UserAddForm;
 /**
 * 
 */
 class RecetteAddForm extends AbstractForm
 {
-    /** @var string */
-    protected $fields = [
-        'nom' => "",
-        'pseudo' => "",
-        'email' => "",
-        'quantite' => [],
-        'ingredient' => []
-    ];
-    
-
-    protected function setVars($data_form)
+    public function defineFields()
     {
-        parent::setVars();
-
-        // $this->workaroundStringToArray($dataform);
+        $this->fields = [
+            'user' => new UserAddForm(),
+            'nom' => "",
+            'quantite0' => "",
+            'ingredient0' => ""
+        ];
     }
-
-    //  /**
-    //  * En attendant d'avoir des tableau dans le formulaire html
-    //  * @todo  Supprimer cette methode ainsi que la surcharge setVars()
-    //  * une fois que le form html sera correct !
-    //  */
-    // protected function workaroundStringToArray($dataform)
-    // {
-    //     foreach ($dataform as $key => $value) {
-    //         if (preg_match('/^ingredient[0-9]+$/', $key)) {
-    //             $index = intval(substr($key, strlen("ingredient")));
-    //             $this->ingredient[$index] = $value;
-    //         }
-    //         else if (preg_match('/^quantite[0-9]+$/', $key)) {
-    //             $index = intval(substr($key, strlen("quantite")));
-    //             $this->quantite[$index] = $value;
-    //         }
-    //     }
-
-    // }
 
     public function validateNom()
     {
@@ -52,31 +26,31 @@ class RecetteAddForm extends AbstractForm
 
     }
 
-    public function validatePseudo()
-    {
-        if (empty($this->pseudo))
-            $this->validation_errors['pseudo'] = "Cannot be empty";
-
-    }
-
-    public function validateEmail()
-    {
-        if (empty($this->pseudo))
-            $this->validation_errors['email'] = "Cannot be empty";
-
-    }
-
     public function validateQuantite()
     {
         if (empty($this->pseudo))
-            $this->validation_errors['quantite'] = "Cannot be empty";
+            $this->validation_errors['quantite0'] = "Cannot be empty";
 
     }
 
     public function validateIngredient()
     {
         if (empty($this->ingredient))
-            $this->validation_errors['ingredient'] = "Cannot be empty";
+            $this->validation_errors['ingredient0'] = "Cannot be empty";
 
     }
+
+    // public function validatePseudo()
+    // {
+    //     if (empty($this->pseudo))
+    //         $this->validation_errors['pseudo'] = "Cannot be empty";
+
+    // }
+
+    // public function validateEmail()
+    // {
+    //     if (empty($this->pseudo))
+    //         $this->validation_errors['email'] = "Cannot be empty";
+
+    // }
 }

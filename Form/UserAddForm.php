@@ -6,7 +6,7 @@ use Marmiton\Core\AbstractForm;
 
 class UserAddForm extends AbstractForm
 {
-    protected function defineFields()
+    public function defineFields()
     {
         $this->fields = [
             'pseudo' => "",

@@ -3,14 +3,21 @@
 namespace Marmiton\Controller;
 
 use Marmiton\Core\AbstractController;
-use Marmiton\models\RecetteModel as Model;
+use Marmiton\models\UserModel;
 /**
 * 
 */
-class UserController 
+class UserController extends AbstractController
 {
-    public function addUser()
+    public function addUser($data)
     {
+        $userModel = new UserModel();
+        //$userModel->addUser($data);
+        $getId = $userModel->getIdUser();
+        // var_dump($getId);
+        // var_dump($data);
+        // $this->render('recette');
         
     }
+
 }

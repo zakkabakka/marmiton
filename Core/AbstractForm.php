@@ -10,17 +10,17 @@ use Marmiton\Core\FormInterface;
 */
 abstract class AbstractForm implements FormInterface
 {
-    protected $fields = [];
-    protected $validation_errors = [];
+    public $fields = [];
+    public $validation_errors = [];
 
-    abstract protected function defineFields();
+    abstract public function defineFields();
 
     function __construct()
     {
         $this->defineFields();
     }
 
-    protected function setVars($data_form)
+    public function setVars($data_form)
     {
         foreach ($data_form as $key => $value) {
             if (array_key_exists($key, $this->fields)) {

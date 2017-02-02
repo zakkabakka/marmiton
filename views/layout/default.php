@@ -27,7 +27,6 @@
 
 <?php echo $contente_for_layout; ?>
 
-
 </body>
 <footer class="page-footer orange darken-3">
     <div class="container">

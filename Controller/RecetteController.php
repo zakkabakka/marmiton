@@ -3,12 +3,12 @@
 namespace Marmiton\Controller;
 
 use Marmiton\Core\AbstractController;
-use Marmiton\models\RecetteModel as Model;
+use Marmiton\models\RecetteModel;
 use Marmiton\Form\RecetteAddForm;
+use Marmiton\Controller\UserController;
 
 class RecetteController extends AbstractController
 {
-
     public function addAction()
     {
         $d['what'] = 'add_form';
@@ -20,13 +20,17 @@ class RecetteController extends AbstractController
                 exit(var_dump($form->getValidationErrors()));
             }
             
-            $model = new Model();
-            $model->addRecette($_POST); 
+            //commencé par le user apres prendre son id pour le add de la recette
+            $UserController = new UserController();
+            $UserController->addUser($_POST);
+
+            //elle attend
+            // $recetteModel = new RecetteModel();
+            // $recetteModel->addRecette($_POST);
             $d['what'] = 'add_success';
         };
 
-        $this->set($d);        
+        $this->set($d);
         $this->render('recette');
     }
-
 }
