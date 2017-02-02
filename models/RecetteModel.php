@@ -14,6 +14,5 @@ class RecetteModel extends Models
         // $db = Models::Connection();
         // var_dump($_POST);
         // $db->
-
     }
 }

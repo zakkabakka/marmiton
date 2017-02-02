@@ -1,19 +1,7 @@
 <div class="row">
             <form class="col s12" action="add" method="post">
                 <input type="hidden" name="submited" value="true">
-                <div class="row">
-                    <h5>Utilisateur</h5>
-                    <div class="col s12">
-                        <div class="input-field inline" style="width: 40%">
-                            <input name="pseudo" id="pseudo" type="text" class="validate">
-                            <label for="pseudo" data-error="wrong" data-success="right">pseudo</label>
-                        </div>
-                        <div class="input-field inline" style="width: 58%">
-                            <input name="email" id="email" type="email" class="validate">
-                            <label for="email" data-error="wrong" data-success="right">Email</label>
-                        </div>
-                    </div>
-                </div>
+                <?php include 'user_add.form.php'; ?>
                 <h5>Votre Recette</h5>
                 <div class="row">
                     <div class="input-field col s8">

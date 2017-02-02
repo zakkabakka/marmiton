@@ -3,18 +3,33 @@
 namespace Marmiton\Core;
 
 use Marmiton\Tools\StringTools;
+use Marmiton\Core\FormInterface;
 
 /**
-* 
+*
 */
-abstract class AbstractForm
+abstract class AbstractForm implements FormInterface
 {
     protected $fields = [];
     protected $validation_errors = [];
 
+    abstract protected function defineFields();
+
     function __construct()
     {
+        $this->defineFields();
+    }
 
+    protected function setVars($data_form)
+    {
+        foreach ($data_form as $key => $value) {
+            if (array_key_exists($key, $this->fields)) {
+                if ($this->fields[$key] instanceof FormInterface) {
+                    $this->fields[$key]->validateForm($value);
+                }
+                $this->$key = $value;
+            }
+        }
     }
 
     public function validateForm($data_form)
@@ -32,15 +47,6 @@ abstract class AbstractForm
         }
         else {
             return true;
-        }
-    }
-
-    protected function setVars($data_form)
-    {
-        foreach ($data_form as $key => $value) {
-            if (array_key_exists($key, $this->fields)) {
-                $this->$key = $value;
-            } 
         }
     }
 
