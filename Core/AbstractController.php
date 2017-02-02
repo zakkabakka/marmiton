@@ -26,7 +26,8 @@ abstract class AbstractController
 
     function set($d)
     {
-        $this->vars = array_merge($this->vars);
+        $this->vars = array_merge($this->vars, $d);
+        // var_dump($this->vars);
     }
     
     function render($view)

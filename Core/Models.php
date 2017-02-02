@@ -7,18 +7,18 @@ namespace Marmiton\Core;
 */
 class Models 
 {
-    protected $db;
-
+    // protected $db;
+    
     public function Connection() 
     {
         $user = 'root';
         $passwd = 'root';
-        $host_db = 'mysql:host=localhost;dbname=marmitonton';
+        $host_db = 'mysql:host=localhost;dbname=marmiton';
         $conn = NULL;
 
         try{
-                $conn = new PDO($host_db, $user, $passwd);
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $conn = new \PDO($host_db, $user, $passwd);
+                // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             } catch(PDOException $e){
                     echo 'ERROR: ' . $e->getMessage();
@@ -27,9 +27,9 @@ class Models
         return $this->db = $conn;
     }
     
-    // public function getConnection()
-    // {
+    public function __construct()
+    {
+       $this->Connection();
 
-    //     return $this->db = $this->Connection();
-    // }
+    }
 }
