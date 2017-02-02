@@ -5,7 +5,7 @@ namespace Marmiton\models;
 use Marmiton\Core\Models;
 
 /**
-* 
+*
 */
 class UserModel extends Models
 {
@@ -22,11 +22,14 @@ class UserModel extends Models
 
         $add = $db->prepare("INSERT INTO users(pseudo, email) VALUES (:pseudo, :email)");
         $add->execute(array(
-        
-            "pseudo" => $userData['user']['pseudo'],
-            "email" => $userData['user']['email']
+
+            "pseudo" => $userData['pseudo'],
+            "email" => $userData['email']
         ));
-        // return $userData['user']['email'];
+
+        // Retourne le dernier ID inseré ...
+        // http://php.net/manual/en/pdo.lastinsertid.php
+        return $db->lastInsertId();
     }
 
     public function getIdUser()
