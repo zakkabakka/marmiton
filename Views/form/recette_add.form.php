@@ -42,11 +42,11 @@
                 </div>
                 <div class="row" id="Cible">
                     <div class="input-field col s6">
-                        <input name="quantites[quantite0]" id="quantite" type="text" class="validate">
+                        <input name="quantites[0]" id="quantite" type="text" class="validate">
                         <label for="quantite">Quantité</label>
                     </div>
                     <div class="input-field col s6">
-                        <input name="ingredients[ingredient0]" id="ingredient" type="text" class="validate">
+                        <input name="ingredients[0]" id="ingredient" type="text" class="validate">
                         <label for="ingredient">Ingredient</label>
                     </div>
                 </div>

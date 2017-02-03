@@ -35,11 +35,11 @@ class RecetteController extends AbstractController
             $ingredientModel = new IngredientModel();
 
             foreach ($_POST['ingredients'] as $key => $ingredient) {
-
+                $cle = preg_match_all('!\d+!', $key, $matches);
                 $ingredientData = [
                     'ingredient' => $ingredient,
                     'recette_id' => $recetteID,
-                    'quantite'   => $_POST['quantites']['quantite0']
+                    'quantite'   => $_POST["quantites"][$key]
                 ];
                 
                 //Insert Quantité
@@ -50,10 +50,15 @@ class RecetteController extends AbstractController
                 $ingredientModel->addQuantite($ingredientData);
                 $ingredientData['id_ingredient'];
             }
+
             //SendMailDeConfirmation
             $sendMail = new SendMail();
+
             $email  = $_POST['user']['email'];
-            $sendMail->mail_confirmation($email);
+            if (isset($email)) {
+                $sendMail->mail_confirmation($email);
+            }
+            
 
             $d['what'] = 'add_success';
         };

@@ -34,7 +34,7 @@ class IngredientModel extends Models
     public function addQuantite($ingredientData)
     {
         $db = $this->getBD();
-        var_dump($ingredientData);
+        // var_dump($ingredientData);
 
         $add = $db->prepare("INSERT INTO recette_has_ingredients(recette_id, ingredients_id, mesure_id, quantite) 
                              VALUES (:recette_id, :ingredients_id, :mesure_id, :quantite)");

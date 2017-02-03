@@ -1,12 +1,12 @@
 <script type="text/javaScript">
-    var i = 1;
-    function fAddText() {
-        var Contenu = document.getElementById('Cible').innerHTML;
-        		Contenu = Contenu + '<br/><div class="input-field col s6"><input name="quantite' + i +'" id="quantite" type="text" class="validate"><label for="quantite">Quantité</label></div>'
-        		+ '<div class="input-field col s6"><input name="ingredient' + i +'" id="ingredient" type="text" class="validate"><label for="ingredient">Ingredient</label></div>';
-        		document.getElementById('Cible').innerHTML = Contenu;
-        		i++;
-    }
+var i = 1;
+function fAddText() {
+    var Contenu = document.getElementById('Cible').innerHTML;
+          Contenu = Contenu + '<br/><div class="input-field col s6"><input name="quantites[' + i +']" id="quantite" type="text" class="validate" required><label for="quantite">Quantité</label></div>'
+          + '<div class="input-field col s6"><input name="ingredients[' + i +']" id="ingredient" type="text" class="validate" required><label for="ingredient">Ingredient</label></div>';
+          document.getElementById('Cible').innerHTML = Contenu;
+          i++;
+}
 </script>
 <div class="containerPage">
     <div class="encart" align="center">

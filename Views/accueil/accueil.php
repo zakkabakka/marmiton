@@ -10,7 +10,8 @@
                     class="material-icons">search</i></a><br><br>
         </div>
     </div>
-    <div class="rowpage">
+    <a class="waves-effect waves-light btn" href="recette/add">Ajouter une recette</a>
+       <div class="rowpage">
         <div class="col s12 m7">
             <div class="card horizontal">
                 <div class="card-image">
