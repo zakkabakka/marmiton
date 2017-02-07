@@ -1,11 +1,11 @@
 <?php
 
-namespace Marmiton\models;
+namespace Marmiton\Models;
 
 use Marmiton\Core\Models;
 
 /**
-* 
+*
 */
 class UserModel extends Models
 {
@@ -21,11 +21,11 @@ class UserModel extends Models
 
         $add = $db->prepare("INSERT INTO users(pseudo, email) VALUES (:pseudo, :email)");
         $add->execute(array(
-        
+
             "pseudo" => $userData['pseudo'],
             "email" => $userData['email']
         ));
-        
+
         return $db->lastInsertId();
     }
 }

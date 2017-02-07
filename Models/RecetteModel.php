@@ -1,6 +1,6 @@
 <?php
 
-namespace Marmiton\models;
+namespace Marmiton\Models;
 
 use Marmiton\Core\Models;
 /**
@@ -14,11 +14,11 @@ class RecetteModel extends Models
         return $this->db;
     }
 
-    public function addRecette($recetteData) 
+    public function addRecette($recetteData)
     {
 
         $db = $this->getBD();
-        
+
         $db = $this->getBD();
         $add = $db->prepare("INSERT INTO recette(nom_recette, id_user) VALUES (:nom, :id_user)");
         $add->execute(array(

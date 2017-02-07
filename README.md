@@ -1,5 +1,5 @@
 # Marmiton
-Projet Ecole : refaire marmiton 
+Projet Ecole : refaire marmiton
 
 <<<<<<< HEAD
 -------------------------------
@@ -14,8 +14,9 @@ sudo vi /etc/hosts ==> dedan on rajoute : 127.0.0.1 marmiton.local
 chemain et command pour le crée ==> sudo vi /private/etc/apache2/other/marmiton.conf OU rajouter directement dans le  : /etc/apache2/extra/httpd-vhosts.conf mais avant il faut faire un backUp du fichier de config : sudo cp httpd-vhosts.conf httpd-vhosts.conf.bak
 
 3 - Le contenu du fichier :
-    
+
 -------------------------------------------------------------------
+```xml
 <VirtualHost *:80>
   ServerName    marmiton.local
   DocumentRoot /Users/zkherfi/Sites/EtnaSchool/marmiton
@@ -31,6 +32,7 @@ chemain et command pour le crée ==> sudo vi /private/etc/apache2/other/marmiton
     Allow from All
   </Directory>
 </VirtualHost>
+```
 ---------------------------------------------------------------------
 
 4 - Après faire ça il faut Restart Apache avec la command : sudo apachectl restart
@@ -39,6 +41,18 @@ Pour Accedez a la page d'accueil l'url : http://marmiton.local/accueil/index
 Pour Accedez a la page Recette l'url : http://marmiton.local/recette/index
                                             /host       /Controller/ Action
 =======
+
+5 - Créer le fichier Config/parameters.php :
+
+- Recopier le fichier Config/parameter.php.dist
+- Le renommer en Config/parameters.php
+- Changer les valeurs des paramètres selon votre installation.
+
+6 - Créer la base de donnée :
+
+...
+
+
 source :
 
 MVC Archi tuto => https://www.grafikart.fr/tutoriels/php/mvc-model-vue-controller-php-132

@@ -5,15 +5,15 @@ namespace Marmiton\Core;
 /**
 * model class
 */
-class Models 
+class Models
 {
     // protected $db;
-    
-    public function Connection() 
+
+    public function Connection()
     {
-        $user = 'root';
-        $passwd = 'root';
-        $host_db = 'mysql:host=localhost;dbname=marmiton';
+        $user = DB_USER;
+        $passwd = DB_PASSWD;
+        $host_db = 'mysql:host='.DB_HOST.';dbname='.DB_NAME;
         $conn = NULL;
 
         try{
@@ -22,11 +22,11 @@ class Models
 
             } catch(PDOException $e){
                     echo 'ERROR: ' . $e->getMessage();
-                }  
+                }
 
         return $this->db = $conn;
     }
-    
+
     public function __construct()
     {
        $this->Connection();

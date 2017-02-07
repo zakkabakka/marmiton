@@ -3,9 +3,9 @@
 namespace Marmiton\Controller;
 
 use Marmiton\Core\AbstractController;
-use Marmiton\models\UserModel;
+use Marmiton\Models\UserModel;
 /**
-* 
+*
 */
 class UserController extends AbstractController
 {

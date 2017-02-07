@@ -3,11 +3,11 @@
 namespace Marmiton\Controller;
 
 use Marmiton\Core\AbstractController;
-use Marmiton\models\RecetteModel;
+use Marmiton\Models\RecetteModel;
 use Marmiton\Form\RecetteAddForm;
 use Marmiton\Controller\UserController;
-use Marmiton\models\UserModel;
-use Marmiton\models\IngredientModel;
+use Marmiton\Models\UserModel;
+use Marmiton\Models\IngredientModel;
 use Marmiton\Tools\SendMail;
 
 class RecetteController extends AbstractController
@@ -21,7 +21,7 @@ class RecetteController extends AbstractController
             if (!$form->validateForm($_POST)) {
                 exit(var_dump($form->getValidationErrors()));
             }
-            
+
             // Insert New User
             $userModel = new UserModel();
             $userID = $userModel->addUser($_POST['user']);
@@ -41,7 +41,7 @@ class RecetteController extends AbstractController
                     'recette_id' => $recetteID,
                     'quantite'   => $_POST["quantites"][$key]
                 ];
-                
+
                 //Insert Quantité
                 $ingredientID = $ingredientModel->addIngredient($ingredientData);
 
@@ -58,7 +58,7 @@ class RecetteController extends AbstractController
             if (isset($email)) {
                 $sendMail->mail_confirmation($email);
             }
-            
+
 
             $d['what'] = 'add_success';
         };

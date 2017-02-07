@@ -1,11 +1,11 @@
 <?php
 
-namespace Marmiton\models;
+namespace Marmiton\Models;
 
 use Marmiton\Core\Models;
 
 /**
-* 
+*
 */
 class IngredientModel extends Models
 {
@@ -36,9 +36,9 @@ class IngredientModel extends Models
         $db = $this->getBD();
         // var_dump($ingredientData);
 
-        $add = $db->prepare("INSERT INTO recette_has_ingredients(recette_id, ingredients_id, mesure_id, quantite) 
+        $add = $db->prepare("INSERT INTO recette_has_ingredients(recette_id, ingredients_id, mesure_id, quantite)
                              VALUES (:recette_id, :ingredients_id, :mesure_id, :quantite)");
-        
+
         $add->execute(array(
             "recette_id" => $ingredientData['recette_id'],
             "ingredients_id" => $ingredientData['id_ingredient'],
