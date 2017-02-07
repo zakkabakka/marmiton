@@ -50,7 +50,13 @@ Pour Accedez a la page Recette l'url : http://marmiton.local/recette/index
 
 6 - Créer la base de donnée :
 
-...
+```bash
+$ mysql -u root -p
+mysql> CREATE DATABASE marmiton CHARACTER SET utf8 COLLATE utf8_general_mysql500_ci;
+mysql> GRANT ALL PRIVILEGES ON marmiton_user.* TO bayard_db_user@localhost IDENTIFIED BY 'marmiton_passwd';
+mysql> FLUSH PRIVILEGES;
+mysql> EXIT
+```
 
 
 source :
