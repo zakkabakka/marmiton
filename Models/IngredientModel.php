@@ -2,17 +2,21 @@
 
 namespace Marmiton\Models;
 
-use Marmiton\Core\Models;
+use Marmiton\Core\AbstractModel;
 
 /**
 *
 */
-class IngredientModel extends Models
+class IngredientModel extends AbstractModel
 {
-    public function getBD()
+    protected function defineTable()
     {
-         $db = Models::Connection();
-         return $this->db;
+        $this->table = 'ingredients';
+    }
+
+    protected function getInsertSqlStatement()
+    {
+        return "INSERT INTO ingredients(nom) VALUES (:nom)";
     }
 
     public function checkIngredient($ingredientData)

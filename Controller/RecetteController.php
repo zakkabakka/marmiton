@@ -8,6 +8,7 @@ use Marmiton\Form\RecetteAddForm;
 use Marmiton\Controller\UserController;
 use Marmiton\Models\UserModel;
 use Marmiton\Models\IngredientModel;
+use Marmiton\Models\MesureModel;
 use Marmiton\Tools\SendMail;
 
 class RecetteController extends AbstractController
@@ -61,7 +62,10 @@ class RecetteController extends AbstractController
 
 
             $d['what'] = 'add_success';
-        };
+        }
+        else {
+            $d['mesures'] = MesureModel::getAll();
+        }
 
         $this->set($d);
         $this->render('recette');

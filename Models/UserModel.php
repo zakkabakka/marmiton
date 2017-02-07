@@ -2,30 +2,39 @@
 
 namespace Marmiton\Models;
 
-use Marmiton\Core\Models;
+use Marmiton\Core\AbstractModel;
 
 /**
 *
 */
-class UserModel extends Models
+class UserModel extends AbstractModel
 {
-    public function getBD()
+    protected function defineTable()
     {
-        $db = Models::Connection();
-        return $this->db;
+        $this->table = 'users';
     }
 
-    public function addUser($userData)
+    protected function getInsertSqlStatement()
     {
-        $db = $this->getBD();
+        return "INSERT INTO users(pseudo, email) VALUES (:pseudo, :email)";
+    }
 
-        $add = $db->prepare("INSERT INTO users(pseudo, email) VALUES (:pseudo, :email)");
-        $add->execute(array(
+    // public function addUser($userData)
+    // {
+    //     $db = $this->getBD();
 
-            "pseudo" => $userData['pseudo'],
-            "email" => $userData['email']
-        ));
+    //     $add = $db->prepare("INSERT INTO users(pseudo, email) VALUES (:pseudo, :email)");
+    //     $add->execute(array(
 
-        return $db->lastInsertId();
+    //         "pseudo" => $userData['pseudo'],
+    //         "email" => $userData['email']
+    //     ));
+
+    //     return $db->lastInsertId();
+    // }
+
+    public function addUSer($userData)
+    {
+        $this->insert($userData);
     }
 }

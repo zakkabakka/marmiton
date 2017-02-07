@@ -2,30 +2,34 @@
 
 namespace Marmiton\Models;
 
-use Marmiton\Core\Models;
+use Marmiton\Core\AbstractModel;
 /**
 * CrudModel class
 */
-class RecetteModel extends Models
+class RecetteModel extends AbstractModel
 {
-    public function getBD()
+    protected function defineTable()
     {
-        $db = Models::Connection();
-        return $this->db;
+        $this->table = 'recette';
+    }
+
+    protected function getInsertSqlStatement()
+    {
+        return "INSERT INTO recette(nom_recette, id_user) VALUES (:nom, :id_user)";
     }
 
     public function addRecette($recetteData)
     {
+        return $this->insert($recetteData);
+        // $db = $this->getBD();
 
-        $db = $this->getBD();
-
-        $db = $this->getBD();
-        $add = $db->prepare("INSERT INTO recette(nom_recette, id_user) VALUES (:nom, :id_user)");
-        $add->execute(array(
-            "nom" => $recetteData['nom'],
-            "id_user" => $recetteData['id_user']
-        ));
-        return $db->lastInsertId();
+        // $db = $this->getBD();
+        // $add = $db->prepare("INSERT INTO recette(nom_recette, id_user) VALUES (:nom, :id_user)");
+        // $add->execute(array(
+        //     "nom" => $recetteData['nom'],
+        //     "id_user" => $recetteData['id_user']
+        // ));
+        // return $db->lastInsertId();
     }
 
 

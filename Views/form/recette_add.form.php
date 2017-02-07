@@ -41,13 +41,20 @@
                     </div>
                 </div>
                 <div class="row" id="Cible">
-                    <div class="input-field col s6">
-                        <input name="quantites[0]" id="quantite" type="text" class="validate">
-                        <label for="quantite">Quantité</label>
+                    <div class="input-field col s3">
+                        <input name="quantites[0]" id="quantite0" type="text" class="validate">
+                        <label for="quantite0">Quantité</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <<select name="mesures[0]">
+                            <?php foreach ($mesures as $id => $name): ?>
+                                <option value="<?php echo $id;?>"><?php echo $name;?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                     <div class="input-field col s6">
-                        <input name="ingredients[0]" id="ingredient" type="text" class="validate">
-                        <label for="ingredient">Ingredient</label>
+                        <input name="ingredients[0]" id="ingredient0" type="text" class="validate">
+                        <label for="ingredient0">Ingredient</label>
                     </div>
                 </div>
                 <a class="btn-floating btn-large waves-effect waves-light right red" onclick="fAddText()">
