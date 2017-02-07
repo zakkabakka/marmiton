@@ -38,7 +38,7 @@ abstract class AbstractForm implements FormInterface
 
         foreach ($this->fields as $key => $value) {
             if (method_exists($this, 'validate'. StringTools::toCamelCase($key, true))) {
-                call_user_method('validate'.$key, $this);
+                call_user_func(array($this, 'validate'.$key));
             }
         }
 
