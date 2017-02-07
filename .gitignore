@@ -2,4 +2,4 @@
 *.nogit*
 .idea
 .DS_Store
-./Config/parameters.php
+/Config/parameters.php
