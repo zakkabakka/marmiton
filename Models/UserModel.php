@@ -35,6 +35,6 @@ class UserModel extends AbstractModel
 
     public function addUSer($userData)
     {
-        $this->insert($userData);
+        return $this->insert($userData);
     }
 }

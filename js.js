@@ -1,3 +1,27 @@
+var WEBROOT = '/Users/zkherfi/Sites/EtnaSchool/lamech_h/marmiton/';
+
+
+
+function getHtmlSelectOption(select){
+
+   $.ajax({
+
+      url: "/ajax/get_mesures_options",
+      type: "GET"
+
+    }).success(function(data) {
+      select.html(data);
+      //console.log(data);
+    });
+}
+
 $(document).ready(function() {
-    $('select').material_select();
-  });
+
+    //getHtmlSelectOption($("#mesures0"));
+    // console.log($("#mesures0").prop("tagName"));
+    $("#mesures0").material_select();
+    $("select").material_select();
+
+    getHtmlSelectOption($("#mesures0"));
+
+});

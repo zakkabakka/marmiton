@@ -46,10 +46,8 @@
                         <label for="quantite0">Quantité</label>
                     </div>
                     <div class="input-field col s3">
-                        <<select name="mesures[0]">
-                            <?php foreach ($mesures as $id => $name): ?>
-                                <option value="<?php echo $id;?>"><?php echo $name;?></option>
-                            <?php endforeach; ?>
+                        <select name="mesures[0]" id="mesures0">
+                            
                         </select>
                     </div>
                     <div class="input-field col s6">

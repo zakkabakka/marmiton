@@ -9,6 +9,7 @@ use Marmiton\Controller\UserController;
 use Marmiton\Models\UserModel;
 use Marmiton\Models\IngredientModel;
 use Marmiton\Models\MesureModel;
+use Marmiton\Models\RecetteHasIngredientsModel;
 use Marmiton\Tools\SendMail;
 
 class RecetteController extends AbstractController
@@ -23,10 +24,11 @@ class RecetteController extends AbstractController
                 exit(var_dump($form->getValidationErrors()));
             }
 
-            // Insert New User
+            //Insert New User
             $userModel = new UserModel();
             $userID = $userModel->addUser($_POST['user']);
-
+            var_dump($userID);
+            
             //Insert Recette
             $recetteModel = new RecetteModel();
             $recetteData = ['nom' => $_POST['nom'], 'id_user' => $userID];
@@ -43,13 +45,14 @@ class RecetteController extends AbstractController
                     'quantite'   => $_POST["quantites"][$key]
                 ];
 
-                //Insert Quantité
+                //Insert quantité
                 $ingredientID = $ingredientModel->addIngredient($ingredientData);
-
                 //rajouter l'id au tableau pour l'envoyer au model pour inseret la quantité
                 $ingredientData['id_ingredient'] = $ingredientID;
-                $ingredientModel->addQuantite($ingredientData);
-                $ingredientData['id_ingredient'];
+                $QuantiteModel = new RecetteHasIngredientsModel;
+
+                $QuantiteModel->addQuantite($ingredientData);
+                // var_dump($ingredientData);
             }
 
             //SendMailDeConfirmation

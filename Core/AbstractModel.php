@@ -25,12 +25,11 @@ abstract class AbstractModel
 
         try{
                 $conn = new \PDO($host_db, $user, $passwd);
-                // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             } catch(PDOException $e){
                     echo 'ERROR: ' . $e->getMessage();
                 }
-
+        $conn->query("SET NAMES UTF8");//Solution encodage UTF8
         return $this->db = $conn;
     }
 
@@ -42,7 +41,7 @@ abstract class AbstractModel
 
     public function getBD()
     {
-        $db = Models::Connection();
+        $db = AbstractModel::Connection();
         return $this->db;
     }
 

@@ -13,7 +13,7 @@ class AccueilController extends AbstractController
     }
 
     public function indexAction()
-    {   
+    {
         $this->render('accueil');
     }
 
