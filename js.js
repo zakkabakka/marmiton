@@ -12,12 +12,13 @@ function getHtmlSelectOption(select){
     }).success(function(data) {
       select.html(data);
       //console.log(data);
+       $("#mesures0").material_select();
     });
 }
 
 $(document).ready(function() {
 
-    //getHtmlSelectOption($("#mesures0"));
+    // getHtmlSelectOption($("#mesures0"));
     // console.log($("#mesures0").prop("tagName"));
     $("#mesures0").material_select();
     $("select").material_select();

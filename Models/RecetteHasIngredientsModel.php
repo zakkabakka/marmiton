@@ -22,6 +22,7 @@ class RecetteHasIngredientsModel extends AbstractModel
 
     public function addQuantite($QuantiteData)
     {
+        //var_dump($QuantiteData);
         return $this->insert($QuantiteData);
         // $db = $this->getBD();
         // // var_dump($ingredientData);

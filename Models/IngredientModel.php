@@ -26,7 +26,7 @@ class IngredientModel extends AbstractModel
 
     public function addIngredient($ingredientData)
     {
-        // var_dump($ingredientData);
+        //var_dump($ingredientData);
 
         return $this->insert($ingredientData);
         // $db = $this->getBD();

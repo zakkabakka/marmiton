@@ -24,35 +24,38 @@ class RecetteController extends AbstractController
                 exit(var_dump($form->getValidationErrors()));
             }
 
-            //Insert New User
+            /* Add User First */
             $userModel = new UserModel();
             $userID = $userModel->addUser($_POST['user']);
-            var_dump($userID);
-            
-            //Insert Recette
+
+            /* Add Recette */
             $recetteModel = new RecetteModel();
             $recetteData = ['nom' => $_POST['nom'], 'id_user' => $userID];
             $recetteID = $recetteModel->addRecette($recetteData);
 
-            //Insert INGREDIENTS
+            /* Add Ingredients */
             $ingredientModel = new IngredientModel();
 
             foreach ($_POST['ingredients'] as $key => $ingredient) {
-                $cle = preg_match_all('!\d+!', $key, $matches);
                 $ingredientData = [
-                    'ingredient' => $ingredient,
-                    'recette_id' => $recetteID,
-                    'quantite'   => $_POST["quantites"][$key]
+                    'nom' => $ingredient
                 ];
-
-                //Insert quantité
                 $ingredientID = $ingredientModel->addIngredient($ingredientData);
-                //rajouter l'id au tableau pour l'envoyer au model pour inseret la quantité
-                $ingredientData['id_ingredient'] = $ingredientID;
+
+            /* Add Quantité with mesure */
                 $QuantiteModel = new RecetteHasIngredientsModel;
 
-                $QuantiteModel->addQuantite($ingredientData);
-                // var_dump($ingredientData);
+                foreach ($_POST['mesures'] as $key => $mesure) {
+
+                    $quantiteData = [
+                        'recette_id' => $recetteID,
+                        'ingredients_id' => $ingredientID,
+                        'mesure_id' => $mesure,
+                        'quantite' => $_POST["quantites"][$key]
+                    ];
+
+                    $QuantiteModel->addQuantite($quantiteData);
+                }
             }
 
             //SendMailDeConfirmation
