@@ -1,14 +1,16 @@
 <div class="containerPage">
     <div class="encart" align="center">
-        <div class="white" style="width: 70%; margin-top: 4%; border-radius: 50px;">
-            <br>
-            <div class="input-field" style="width: 60%; margin-top: 2%">
-                <input id="first_name2" type="text" class="validate">
-                <label class="active" for="first_name2">Rechercher une recette</label>
+        <form action="search/recette" method="post">
+            <div class="white" style="width: 70%; margin-top: 4%; border-radius: 50px;">
+                <br>
+                <div class="input-field" style="width: 60%; margin-top: 2%">
+                    <input id="first_name2" type="text" name="search" class="validate">
+                    <label class="active" for="first_name2">Rechercher une recette</label>
+                </div>
+                <a class="btn-floating btn-large waves-effect waves-light orange darken-3"><i
+                        class="material-icons">search</i></a><br><br>
             </div>
-            <a class="btn-floating btn-large waves-effect waves-light orange darken-3"><i
-                    class="material-icons">search</i></a><br><br>
-        </div>
+        </form>
     </div>
     <a class="waves-effect waves-light btn" href="recette/add">Ajouter une recette</a>
        <div class="rowpage">

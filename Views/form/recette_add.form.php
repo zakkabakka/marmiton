@@ -1,3 +1,15 @@
+<script type="text/javaScript">
+    var i = 1;
+    function fAddText() {
+        var Contenu = document.getElementById('Cible').innerHTML;
+        Contenu = Contenu + '<br/><div class="input-field col s3"><input name="quantites[' + i +']" id="quantite" type="text" class="validate" required><label for="quantite">Quantité</label></div>' +
+            '<div class="input-field col s3"><select name="mesures[' + i +']" id="mesures0"></select></div>' +
+            '<div class="input-field col s6"><input name="ingredients[' + i +']" id="ingredient" type="text" class="validate" required><label for="ingredient">Ingredient</label></div>';
+        document.getElementById('Cible').innerHTML = Contenu;
+        i++;
+        //appel AJAX qui va retourner le select...
+    }
+</script>
 <div class="row">
             <form class="col s12" action="add" method="post">
                 <input type="hidden" name="submited" value="true">
