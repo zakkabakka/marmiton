@@ -4,6 +4,7 @@ namespace Marmiton\Controller;
 
 use Marmiton\Core\AbstractController;
 use Marmiton\Models\MesureModel;
+use Marmiton\Models\CategorieHasRecettesModel;
 
 class AjaxController extends AbstractController
 {
@@ -20,6 +21,16 @@ class AjaxController extends AbstractController
 
         foreach ($mesures as $mesure) {
             echo '<option value="'.$mesure['mesure_id'].'">'.$mesure['mesure'].'</option>';
+        }
+    }
+
+    public function getCategorieOptionsAction()
+    {
+
+        $categorie = CategorieHasRecettesModel::getCategorie();
+
+        foreach ($categorie as $cat) {
+            echo '<option value="'.$cat['id_categorie'].'">'.$cat['categorie'].'</option>';
         }
     }
 

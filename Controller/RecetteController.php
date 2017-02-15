@@ -10,7 +10,9 @@ use Marmiton\Models\UserModel;
 use Marmiton\Models\IngredientModel;
 use Marmiton\Models\MesureModel;
 use Marmiton\Models\RecetteHasIngredientsModel;
+use Marmiton\Models\CategorieHasRecettesModel;
 use Marmiton\Tools\SendMail;
+
 
 class RecetteController extends AbstractController
 {
@@ -33,30 +35,45 @@ class RecetteController extends AbstractController
             $recetteData = ['nom' => $_POST['nom'], 'id_user' => $userID];
             $recetteID = $recetteModel->addRecette($recetteData);
 
+            /* Add categorie */
+            $categorieModel = new CategorieHasRecettesModel();
+            $categorieData = ['id_categorie' => $_POST['categorie'], 'id_recette' => $recetteID];
+            $categorieID = $categorieModel->addCategorieRecette($categorieData);
+
             /* Add Ingredients */
             $ingredientModel = new IngredientModel();
+
+            /* Add Quantité with mesure */
+            $QuantiteModel = new RecetteHasIngredientsModel;
 
             foreach ($_POST['ingredients'] as $key => $ingredient) {
                 $ingredientData = [
                     'nom' => $ingredient
                 ];
                 $ingredientID = $ingredientModel->addIngredient($ingredientData);
-
-            /* Add Quantité with mesure */
-                $QuantiteModel = new RecetteHasIngredientsModel;
-
-                foreach ($_POST['mesures'] as $key => $mesure) {
-
-                    $quantiteData = [
-                        'recette_id' => $recetteID,
-                        'ingredients_id' => $ingredientID,
-                        'mesure_id' => $mesure,
-                        'quantite' => $_POST["quantites"][$key]
-                    ];
-
-                    $QuantiteModel->addQuantite($quantiteData);
-                }
+                $quantiteData = [
+                    'recette_id' => $recetteID,
+                    'ingredients_id' => $ingredientID,
+                    'mesure_id' => $_POST["mesures"][$key],
+                    'quantite' => $_POST["quantites"][$key]
+                ];
+                $QuantiteModel->addQuantite($quantiteData);
             }
+
+
+
+            /*foreach ($_POST['mesures'] as $key => $mesure) {
+                $quantiteData = [
+                    'recette_id' => $recetteID,
+                    'ingredients_id' => $ingredientID,
+                    'mesure_id' => $mesure,
+                    'quantite' => $_POST["quantites"][$key]
+                ];
+
+                //var_dump($quantiteData);
+                print_r($quantiteData);
+                $QuantiteModel->addQuantite($quantiteData);
+            }*/
 
             //SendMailDeConfirmation
             $sendMail = new SendMail();

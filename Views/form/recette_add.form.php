@@ -1,12 +1,62 @@
 <script type="text/javaScript">
+
+
+
     var i = 1;
+
     function fAddText() {
         var Contenu = document.getElementById('Cible').innerHTML;
         Contenu = Contenu + '<br/><div class="input-field col s3"><input name="quantites[' + i +']" id="quantite" type="text" class="validate" required><label for="quantite">Quantité</label></div>' +
-            '<div class="input-field col s3"><select name="mesures[' + i +']" id="mesures0"></select></div>' +
+            '<div class="input-field col s3"><select name="mesures[' + i +']" id="mesures'+i+'" class="mesures browser-default"></select></div>' +
             '<div class="input-field col s6"><input name="ingredients[' + i +']" id="ingredient" type="text" class="validate" required><label for="ingredient">Ingredient</label></div>';
         document.getElementById('Cible').innerHTML = Contenu;
-        i++;
+
+            var select = $("#mesures"+i+"");
+
+            $.ajax({
+
+                url: "/ajax/get_mesures_options",
+                type: "GET"
+
+            }).success(function(data) {
+                select.html(data);
+                console.log(data);
+/*                for (var j = 0; j < i; j++)
+                {
+                    $("#mesures"+i+"").material_select();
+
+                }*/
+                i++;
+
+            });
+
+
+            //$("#mesures"+i+"").material_select();
+
+       // $(document).ready(function() {
+
+            //getHtmlSelectOption($("#mesures0"));
+            // console.log($("#mesures0").prop("tagName"));
+            //$("#mesures").material_select();
+            //$("select").material_select();
+            //alert('zakka');
+
+            //getHtmlSelectOption($("#mesures"+i+""));
+
+       // });
+
+
+
+        //$(document).ready(function() {
+
+            //getHtmlSelectOption($("#mesures0"));
+            // console.log($("#mesures0").prop("tagName"));
+            //$("#mesures0").material_select();
+            //$("select").material_select();
+            //getHtmlSelectOption($("#mesures0"));
+
+        //});
+        //console.log(Contenu);
         //appel AJAX qui va retourner le select...
     }
 </script>
@@ -21,8 +71,10 @@
                         <label for="name">Nom de la recette</label>
                     </div>
                     <div class="input-field col s4">
-                        <input disabled id="Temps" type="text" class="validate">
-                        <label for="Temps">Temps de préparation</label>
+                        <select id="categorie" name="categorie" required>
+
+                        </select>
+                        <label>Categorie du plat</label>
                     </div>
                     <div class="input-field col s4">
                         <select disabled>
@@ -40,26 +92,17 @@
                             <option value="2">Option 2</option>
                             <option value="3">Option 3</option>
                         </select>
-                        <label>Difficulté</label>
-                    </div>
-                    <div class="input-field col s4">
-                        <select disabled>
-                            <option value="" disabled selected>Choisir une option</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
-                        </select>
                         <label>Cout</label>
                     </div>
                 </div>
-                <div class="row" id="Cible">
+                <div class="row" id="Cible" data-count="1">
                     <div class="input-field col s3">
                         <input name="quantites[0]" id="quantite0" type="text" class="validate">
                         <label for="quantite0">Quantité</label>
                     </div>
                     <div class="input-field col s3">
-                        <select name="mesures[0]" id="mesures0">
-                            
+                        <select name="mesures[0]" id="mesures0" class="browser-default">
+
                         </select>
                     </div>
                     <div class="input-field col s6">

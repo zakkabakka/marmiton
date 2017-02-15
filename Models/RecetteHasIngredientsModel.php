@@ -36,5 +36,15 @@ class RecetteHasIngredientsModel extends AbstractModel
         //     "quantite" => $ingredientData['quantite']
         // ));
     }
+    public function getRecettes()
+    {
+        $db = AbstractModel::getBD();
+        $sql = "SELECT * FROM recette";
+        $recette = $db->prepare($sql);
+        $recette->execute();
+        $recettes = $recette->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $recettes;
+    }
 
 }

@@ -31,6 +31,10 @@ class RecetteModel extends AbstractModel
         // ));
         // return $db->lastInsertId();
     }
+    public function getRecettes()
+    {
+        return "SELECT * from recette";
+    }
 
 
 
