@@ -22,29 +22,7 @@ class RecetteHasIngredientsModel extends AbstractModel
 
     public function addQuantite($QuantiteData)
     {
-        //var_dump($QuantiteData);
         return $this->insert($QuantiteData);
-        // $db = $this->getBD();
-        // // var_dump($ingredientData);
-
-        // $add = $db->prepare("");
-
-        // $add->execute(array(
-        //     "recette_id" => $ingredientData['recette_id'],
-        //     "ingredients_id" => $ingredientData['id_ingredient'],
-        //     "mesure_id" => $ingredientData['recette_id'],
-        //     "quantite" => $ingredientData['quantite']
-        // ));
-    }
-    public function getRecettes()
-    {
-        $db = AbstractModel::getBD();
-        $sql = "SELECT * FROM recette";
-        $recette = $db->prepare($sql);
-        $recette->execute();
-        $recettes = $recette->fetchAll(\PDO::FETCH_ASSOC);
-
-        return $recettes;
     }
 
 }

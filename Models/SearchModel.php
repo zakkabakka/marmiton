@@ -27,7 +27,6 @@ class SearchModel extends AbstractModel
         $mesure = $db->prepare($sql);
         $mesure->execute();
         $mesures = $mesure->fetchAll(\PDO::FETCH_ASSOC);
-        // var_dump($mesures);
         return $mesures;
     
     }

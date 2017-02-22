@@ -25,14 +25,11 @@ class CategorieHasRecettesModel extends AbstractModel
         $categorie = $db->prepare($sql);
         $categorie->execute();
         $categorie = $categorie->fetchAll(\PDO::FETCH_ASSOC);
-        //var_dump($categorie);
         return $categorie;
     }
 
     public function addCategorieRecette($categorieData)
     {
-        //var_dump($categorieData);
         return $this->insert($categorieData);
-
     }
 }

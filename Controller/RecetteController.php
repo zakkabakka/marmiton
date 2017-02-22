@@ -3,12 +3,14 @@
 namespace Marmiton\Controller;
 
 use Marmiton\Core\AbstractController;
-use Marmiton\Models\RecetteModel;
 use Marmiton\Form\RecetteAddForm;
 use Marmiton\Controller\UserController;
+use Marmiton\Models\RecetteModel;
+use Marmiton\Models\EtapeRecetteModel;
 use Marmiton\Models\UserModel;
 use Marmiton\Models\IngredientModel;
 use Marmiton\Models\MesureModel;
+use Marmiton\Models\EtapeHasRecetteModel;
 use Marmiton\Models\RecetteHasIngredientsModel;
 use Marmiton\Models\CategorieHasRecettesModel;
 use Marmiton\Tools\SendMail;
@@ -28,11 +30,28 @@ class RecetteController extends AbstractController
 
             /* Add User First */
             $userModel = new UserModel();
-            $userID = $userModel->addUser($_POST['user']);
+
+            $allUsers = $userModel->getAllUsers();
+            // var_dump($allUsers);
+
+            $user = $_POST['user']['email'];
+            // var_dump($user);
+
+            $userExist = array_search($user, array_column($allUsers, 'email'));
+            // var_dump($userExist);
+
+            if ($userExist !== false) {
+                $userID = $allUsers[$userExist]['id_user'];
+            }
+            else {
+                $userID = $userModel->addUser($_POST['user']);
+            }
 
             /* Add Recette */
             $recetteModel = new RecetteModel();
             $recetteData = ['nom' => $_POST['nom'], 'id_user' => $userID];
+
+
             $recetteID = $recetteModel->addRecette($recetteData);
 
             /* Add categorie */
@@ -45,40 +64,69 @@ class RecetteController extends AbstractController
 
             /* Add Quantité with mesure */
             $QuantiteModel = new RecetteHasIngredientsModel;
+            $allIngredients = $ingredientModel->getAllIngredients();
+
 
             foreach ($_POST['ingredients'] as $key => $ingredient) {
-                $ingredientData = [
-                    'nom' => $ingredient
-                ];
-                $ingredientID = $ingredientModel->addIngredient($ingredientData);
+
+                $ingredient = trim(strtolower($ingredient));
+
+                $ingredientExist = array_search($ingredient, array_column($allIngredients, 'nom'));
+
+                if ($ingredientExist !== false) {
+                    $ingredientID = $allIngredients[$ingredientExist]['id_ingredient'];
+                }
+                else {
+                    $ingredientID = $ingredientModel->addIngredient(['nom' => $ingredient]);
+                }
+                
                 $quantiteData = [
                     'recette_id' => $recetteID,
                     'ingredients_id' => $ingredientID,
                     'mesure_id' => $_POST["mesures"][$key],
                     'quantite' => $_POST["quantites"][$key]
                 ];
+
                 $QuantiteModel->addQuantite($quantiteData);
             }
 
+            /* Add etape */
+            $EtapeRecetteModel = new EtapeRecetteModel;
+            $EtapeHasRecetteModel = new EtapeHasRecetteModel;
 
 
-            /*foreach ($_POST['mesures'] as $key => $mesure) {
-                $quantiteData = [
-                    'recette_id' => $recetteID,
-                    'ingredients_id' => $ingredientID,
-                    'mesure_id' => $mesure,
-                    'quantite' => $_POST["quantites"][$key]
+            foreach ($_POST['etapes'] as $key => $contenuEtape) {
+
+                $etape = $key + 1;
+
+                $etapesData = [
+                    // 'recette_id' => $recetteID,
+                    'etape' => $etape,
+                    'contenu' => $contenuEtape    
+                    ];
+// echo "******************* $key *********************************\n";
+// var_dump($etapesData);
+                //Checké si il Add tout les etapes ou juste une
+
+                // !----------------------------------------
+                $etapeID = $EtapeRecetteModel->addEtapeRecette($etapesData);
+// var_dump(compact('etapeID'));
+
+                $EtapeHasRecetteData = [
+                    'id_etape' => $etapeID,
+                    'id_recette' => $recetteID
                 ];
+// var_dump(compact('EtapeHasRecetteData'));
+                $EtapeHasRecetteModel->addEtapeHasRecette($EtapeHasRecetteData);
+// var_dump(compact('test'));
 
-                //var_dump($quantiteData);
-                print_r($quantiteData);
-                $QuantiteModel->addQuantite($quantiteData);
-            }*/
+            }
 
             //SendMailDeConfirmation
             $sendMail = new SendMail();
 
             $email  = $_POST['user']['email'];
+
             if (isset($email)) {
                 $sendMail->mail_confirmation($email);
             }

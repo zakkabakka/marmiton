@@ -3,7 +3,7 @@
 namespace Marmiton\Controller;
 // use Models\Crud;
 use Marmiton\Core\AbstractController;
-use Marmiton\Models\RecetteHasIngredientsModel;
+use Marmiton\Models\RecetteModel;
 
 class AccueilController extends AbstractController
 {
@@ -11,19 +11,20 @@ class AccueilController extends AbstractController
     {
         echo "Default Example Page\n";
     }
+
     public function indexAction()
     {
-        $recettes = new RecetteHasIngredientsModel;
+        $recettes = new RecetteModel;
         $recette = $recettes->getRecettes();
-        var_dump($recette);
+        print_r($recette);
         $this->render('accueil');
     }
 
     public function getRecette()
     {
-        $recettes = new RecetteHasIngredientsModel;
+        $recettes = new RecetteModel;
         $recette = $recettes->getRecettes();
-        var_dump($recette);
+        // var_dump($recette);
     }
 
 }

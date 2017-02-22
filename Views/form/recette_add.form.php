@@ -1,8 +1,6 @@
 <script type="text/javaScript">
-
-
-
     var i = 1;
+    var y = 1;
 
     function fAddText() {
         var Contenu = document.getElementById('Cible').innerHTML;
@@ -21,43 +19,15 @@
             }).success(function(data) {
                 select.html(data);
                 console.log(data);
-/*                for (var j = 0; j < i; j++)
-                {
-                    $("#mesures"+i+"").material_select();
-
-                }*/
                 i++;
 
             });
-
-
-            //$("#mesures"+i+"").material_select();
-
-       // $(document).ready(function() {
-
-            //getHtmlSelectOption($("#mesures0"));
-            // console.log($("#mesures0").prop("tagName"));
-            //$("#mesures").material_select();
-            //$("select").material_select();
-            //alert('zakka');
-
-            //getHtmlSelectOption($("#mesures"+i+""));
-
-       // });
-
-
-
-        //$(document).ready(function() {
-
-            //getHtmlSelectOption($("#mesures0"));
-            // console.log($("#mesures0").prop("tagName"));
-            //$("#mesures0").material_select();
-            //$("select").material_select();
-            //getHtmlSelectOption($("#mesures0"));
-
-        //});
-        //console.log(Contenu);
-        //appel AJAX qui va retourner le select...
+    }
+    function fAddEtape() {
+        var Contenu = document.getElementById('CibleEtape').innerHTML;
+        Contenu = Contenu + '<br><div class="input-field col s12"><input name="etapes[' + y +']" id="etape' + y +'" type="text" class="validate" required><label for="etape' + y +'">Etape ' + (y + 1) +':</label></div>';
+        document.getElementById('CibleEtape').innerHTML = Contenu;
+        y++;
     }
 </script>
 <div class="row">
@@ -112,7 +82,18 @@
                 </div>
                 <a class="btn-floating btn-large waves-effect waves-light right red" onclick="fAddText()">
                     <i class="material-icons">add</i></a><br><br>
+                <div class="row" id="CibleEtape" data-count="1">
+                    <div class="input-field col s12">
+                        <input name="etapes[0]" id="etape0" type="text" class="validate">
+                        <label for="etape0">Etape 1:</label>
+                    </div>
+                </div>
+                <a class="btn-floating btn-large waves-effect waves-light right green" onclick="fAddEtape()">
+                    <i class="material-icons">add</i></a><br><br>
                 <div align="center">
+                    <br>
+                <div align="center">
+
                     <button class="btn waves-effect waves-light orange darken-3" type="submit" name="action">Envoyer la
                         recette
                         <i class="material-icons right">send</i>

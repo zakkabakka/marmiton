@@ -19,22 +19,21 @@ class UserModel extends AbstractModel
         return "INSERT INTO users(pseudo, email) VALUES (:pseudo, :email)";
     }
 
-    // public function addUser($userData)
-    // {
-    //     $db = $this->getBD();
+    public function getAllUsers()
+    {
+        //check si le nouveau users existe dans la table//
+        $db = AbstractModel::getBD();
 
-    //     $add = $db->prepare("INSERT INTO users(pseudo, email) VALUES (:pseudo, :email)");
-    //     $add->execute(array(
+        $sql = "SELECT * FROM users";
+        $usersEx = $db->query($sql);
+        return $usersExist = $usersEx->fetchAll(\PDO::FETCH_ASSOC);
 
-    //         "pseudo" => $userData['pseudo'],
-    //         "email" => $userData['email']
-    //     ));
-
-    //     return $db->lastInsertId();
-    // }
+    }
 
     public function addUSer($userData)
     {
         return $this->insert($userData);
     }
+
+
 }
