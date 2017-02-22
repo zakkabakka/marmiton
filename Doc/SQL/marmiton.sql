@@ -1,16 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.3
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost
--- Généré le :  Mar 07 Février 2017 à 15:33
--- Version du serveur :  5.5.54-0+deb8u1
--- Version de PHP :  7.0.15-1~dotdeb+8.1
+-- Généré le :  Mer 22 Février 2017 à 09:23
+-- Version du serveur :  5.7.16
+-- Version de PHP :  5.6.27
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -22,39 +19,64 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `marmiton`
 --
--- CREATE DATABASE IF NOT EXISTS `marmiton` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_mysql500_ci;
--- USE `marmiton`;
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `categorie`
 --
--- Création :  Mar 07 Février 2017 à 14:17
+
+CREATE TABLE `categorie` (
+  `id_categorie` int(11) NOT NULL,
+  `categorie` varchar(250) COLLATE utf8_general_mysql500_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+
+--
+-- Contenu de la table `categorie`
 --
 
-DROP TABLE IF EXISTS `categorie`;
-CREATE TABLE IF NOT EXISTS `categorie` (
-  `id_categorie` int(11) NOT NULL AUTO_INCREMENT,
-  `categorie` varchar(250) COLLATE utf8_general_mysql500_ci NOT NULL,
-  PRIMARY KEY (`id_categorie`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+INSERT INTO `categorie` (`id_categorie`, `categorie`) VALUES
+(2, 'Entree'),
+(3, 'Plat'),
+(4, 'Déssert'),
+(5, 'Boisson'),
+(6, 'Sucrée'),
+(7, 'Salé'),
+(8, 'Oriental'),
+(9, 'Glace');
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `categorie_has_recettes`
 --
--- Création :  Mar 07 Février 2017 à 14:20
+
+CREATE TABLE `categorie_has_recettes` (
+  `id_categorie` int(11) NOT NULL,
+  `id_recette` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `etapeRecette`
 --
 
-DROP TABLE IF EXISTS `categorie_has_recettes`;
-CREATE TABLE IF NOT EXISTS `categorie_has_recettes` (
-  `id_categorie` int(11) NOT NULL,
-  `id_recette` int(11) NOT NULL,
-  UNIQUE KEY `id_categorie_2` (`id_categorie`,`id_recette`),
-  KEY `id_categorie` (`id_categorie`),
-  KEY `id_recette` (`id_recette`)
+CREATE TABLE `etapeRecette` (
+  `id_etape` int(11) NOT NULL,
+  `etape` int(11) NOT NULL,
+  `contenu` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `etape_has_recette`
+--
+
+CREATE TABLE `etape_has_recette` (
+  `id_etape` int(11) NOT NULL,
+  `id_recette` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
 -- --------------------------------------------------------
@@ -62,14 +84,10 @@ CREATE TABLE IF NOT EXISTS `categorie_has_recettes` (
 --
 -- Structure de la table `ingredients`
 --
--- Création :  Mar 07 Février 2017 à 13:54
---
 
-DROP TABLE IF EXISTS `ingredients`;
-CREATE TABLE IF NOT EXISTS `ingredients` (
-  `id_ingredient` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(250) COLLATE utf8_general_mysql500_ci NOT NULL,
-  PRIMARY KEY (`id_ingredient`)
+CREATE TABLE `ingredients` (
+  `id_ingredient` int(11) NOT NULL,
+  `nom` varchar(250) COLLATE utf8_general_mysql500_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
 -- --------------------------------------------------------
@@ -77,21 +95,12 @@ CREATE TABLE IF NOT EXISTS `ingredients` (
 --
 -- Structure de la table `mesures`
 --
--- Création :  Mar 07 Février 2017 à 13:55
---
 
-DROP TABLE IF EXISTS `mesures`;
-CREATE TABLE IF NOT EXISTS `mesures` (
-  `mesure_id` int(11) NOT NULL AUTO_INCREMENT,
-  `mesure` varchar(250) COLLATE utf8_general_mysql500_ci NOT NULL,
-  PRIMARY KEY (`mesure_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+CREATE TABLE `mesures` (
+  `mesure_id` int(11) NOT NULL,
+  `mesure` varchar(250) COLLATE utf8_general_mysql500_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
---
--- Vider la table avant d'insérer `mesures`
---
-
-TRUNCATE TABLE `mesures`;
 --
 -- Contenu de la table `mesures`
 --
@@ -110,19 +119,13 @@ INSERT INTO `mesures` (`mesure_id`, `mesure`) VALUES
 --
 -- Structure de la table `notations`
 --
--- Création :  Mar 07 Février 2017 à 14:32
---
 
-DROP TABLE IF EXISTS `notations`;
-CREATE TABLE IF NOT EXISTS `notations` (
-  `notations_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `notations` (
+  `notations_id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_recette` int(11) NOT NULL,
   `notations` int(1) UNSIGNED DEFAULT '0',
-  `commentaire` text COLLATE utf8_general_mysql500_ci,
-  PRIMARY KEY (`notations_id`),
-  KEY `id_user` (`id_user`),
-  KEY `id_recette` (`id_recette`)
+  `commentaire` text COLLATE utf8_general_mysql500_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
 -- --------------------------------------------------------
@@ -130,17 +133,11 @@ CREATE TABLE IF NOT EXISTS `notations` (
 --
 -- Structure de la table `recette`
 --
--- Création :  Mar 07 Février 2017 à 14:14
---
 
-DROP TABLE IF EXISTS `recette`;
-CREATE TABLE IF NOT EXISTS `recette` (
-  `id_recette` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `recette` (
+  `id_recette` int(11) NOT NULL,
   `nom_recette` varchar(250) COLLATE utf8_general_mysql500_ci NOT NULL,
-  `id_user` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_recette`) USING BTREE,
-  UNIQUE KEY `id_recette` (`id_recette`),
-  KEY `id_user` (`id_user`)
+  `id_user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
 -- --------------------------------------------------------
@@ -148,47 +145,141 @@ CREATE TABLE IF NOT EXISTS `recette` (
 --
 -- Structure de la table `recette_has_ingredients`
 --
--- Création :  Mar 07 Février 2017 à 14:22
---
 
-DROP TABLE IF EXISTS `recette_has_ingredients`;
-CREATE TABLE IF NOT EXISTS `recette_has_ingredients` (
+CREATE TABLE `recette_has_ingredients` (
   `recette_id` int(11) NOT NULL,
   `ingredients_id` int(11) NOT NULL,
   `mesure_id` int(11) NOT NULL,
-  `quantite` int(11) NOT NULL,
-  PRIMARY KEY (`recette_id`,`ingredients_id`),
-  KEY `recette_id` (`recette_id`),
-  KEY `ingredients_id` (`ingredients_id`),
-  KEY `mesure_id` (`mesure_id`)
+  `quantite` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
---
--- Vider la table avant d'insérer `recette_has_ingredients`
---
-
-TRUNCATE TABLE `recette_has_ingredients`;
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `users`
 --
--- Création :  Mar 07 Février 2017 à 13:54
---
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id_user` int(11) NOT NULL,
   `email` varchar(250) COLLATE utf8_general_mysql500_ci NOT NULL,
-  `pseudo` varchar(250) COLLATE utf8_general_mysql500_ci NOT NULL,
-  PRIMARY KEY (`id_user`)
+  `pseudo` varchar(250) COLLATE utf8_general_mysql500_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
 --
--- Vider la table avant d'insérer `users`
+-- Index pour les tables exportées
 --
 
-TRUNCATE TABLE `users`;
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`id_categorie`) USING BTREE;
+
+--
+-- Index pour la table `categorie_has_recettes`
+--
+ALTER TABLE `categorie_has_recettes`
+  ADD UNIQUE KEY `id_categorie_2` (`id_categorie`,`id_recette`),
+  ADD KEY `id_categorie` (`id_categorie`),
+  ADD KEY `id_recette` (`id_recette`);
+
+--
+-- Index pour la table `etapeRecette`
+--
+ALTER TABLE `etapeRecette`
+  ADD PRIMARY KEY (`id_etape`),
+  ADD UNIQUE KEY `id_etape` (`id_etape`);
+
+--
+-- Index pour la table `etape_has_recette`
+--
+ALTER TABLE `etape_has_recette`
+  ADD UNIQUE KEY `id_etape` (`id_etape`),
+  ADD UNIQUE KEY `id_etape_2` (`id_etape`),
+  ADD UNIQUE KEY `id_recette` (`id_recette`);
+
+--
+-- Index pour la table `ingredients`
+--
+ALTER TABLE `ingredients`
+  ADD PRIMARY KEY (`id_ingredient`);
+
+--
+-- Index pour la table `mesures`
+--
+ALTER TABLE `mesures`
+  ADD PRIMARY KEY (`mesure_id`);
+
+--
+-- Index pour la table `notations`
+--
+ALTER TABLE `notations`
+  ADD PRIMARY KEY (`notations_id`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_recette` (`id_recette`);
+
+--
+-- Index pour la table `recette`
+--
+ALTER TABLE `recette`
+  ADD PRIMARY KEY (`id_recette`) USING BTREE,
+  ADD UNIQUE KEY `id_recette` (`id_recette`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Index pour la table `recette_has_ingredients`
+--
+ALTER TABLE `recette_has_ingredients`
+  ADD PRIMARY KEY (`recette_id`,`ingredients_id`),
+  ADD KEY `recette_id` (`recette_id`),
+  ADD KEY `ingredients_id` (`ingredients_id`),
+  ADD KEY `mesure_id` (`mesure_id`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `id_categorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT pour la table `etapeRecette`
+--
+ALTER TABLE `etapeRecette`
+  MODIFY `id_etape` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `ingredients`
+--
+ALTER TABLE `ingredients`
+  MODIFY `id_ingredient` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `mesures`
+--
+ALTER TABLE `mesures`
+  MODIFY `mesure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT pour la table `notations`
+--
+ALTER TABLE `notations`
+  MODIFY `notations_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `recette`
+--
+ALTER TABLE `recette`
+  MODIFY `id_recette` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Contraintes pour les tables exportées
 --
@@ -197,15 +288,22 @@ TRUNCATE TABLE `users`;
 -- Contraintes pour la table `categorie_has_recettes`
 --
 ALTER TABLE `categorie_has_recettes`
-  ADD CONSTRAINT `categorie_has_recettes_ibfk_2` FOREIGN KEY (`id_categorie`) REFERENCES `categorie` (`id_categorie`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `categorie_has_recettes_ibfk_1` FOREIGN KEY (`id_recette`) REFERENCES `recette` (`id_recette`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `categorie_has_recettes_ibfk_1` FOREIGN KEY (`id_recette`) REFERENCES `recette` (`id_recette`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `categorie_has_recettes_ibfk_2` FOREIGN KEY (`id_categorie`) REFERENCES `categorie` (`id_categorie`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `etape_has_recette`
+--
+ALTER TABLE `etape_has_recette`
+  ADD CONSTRAINT `etape_has_recette_ibfk_1` FOREIGN KEY (`id_etape`) REFERENCES `etapeRecette` (`id_etape`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `etape_has_recette_ibfk_2` FOREIGN KEY (`id_recette`) REFERENCES `recette` (`id_recette`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `notations`
 --
 ALTER TABLE `notations`
-  ADD CONSTRAINT `notations_ibfk_2` FOREIGN KEY (`id_recette`) REFERENCES `recette` (`id_recette`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `notations_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `notations_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `notations_ibfk_2` FOREIGN KEY (`id_recette`) REFERENCES `recette` (`id_recette`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `recette`
@@ -217,11 +315,9 @@ ALTER TABLE `recette`
 -- Contraintes pour la table `recette_has_ingredients`
 --
 ALTER TABLE `recette_has_ingredients`
-  ADD CONSTRAINT `recette_has_ingredients_ibfk_3` FOREIGN KEY (`mesure_id`) REFERENCES `mesures` (`mesure_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `recette_has_ingredients_ibfk_1` FOREIGN KEY (`recette_id`) REFERENCES `recette` (`id_recette`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `recette_has_ingredients_ibfk_2` FOREIGN KEY (`ingredients_id`) REFERENCES `ingredients` (`id_ingredient`) ON DELETE CASCADE ON UPDATE CASCADE;
-SET FOREIGN_KEY_CHECKS=1;
-COMMIT;
+  ADD CONSTRAINT `recette_has_ingredients_ibfk_2` FOREIGN KEY (`ingredients_id`) REFERENCES `ingredients` (`id_ingredient`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `recette_has_ingredients_ibfk_3` FOREIGN KEY (`mesure_id`) REFERENCES `mesures` (`mesure_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
