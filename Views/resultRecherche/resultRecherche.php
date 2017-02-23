@@ -17,11 +17,11 @@
     <?php
     
      $recetteID = NULL;
-     if (isset($recetteData)) {
-         for ($g=0; $g < count($recetteData); $g++) {
-            for ($i=0; $i < count($recetteData[$g]); $i++) { 
-                if ($recetteID != $recetteData[$g][$i]['id_recette']) {
-                    $recetteID = $recetteData[$g][$i]['id_recette'];
+     if (isset($getSearchRecetteParNom)) {
+         for ($g=0; $g < count($getSearchRecetteParNom); $g++) {
+            for ($i=0; $i < count($getSearchRecetteParNom[$g]); $i++) { 
+                if ($recetteID != $getSearchRecetteParNom[$g][$i]['id_recette']) {
+                    $recetteID = $getSearchRecetteParNom[$g][$i]['id_recette'];
                     ?>
         <div id="results"></div>
         <div class="rowpage">
@@ -32,16 +32,16 @@
                     </div>
                     <div class="card-stacked">
                         <div class="card-content">
-                            Crée par <?php echo $recetteData[$g][$i]['pseudo']; ?>
-                            <center><h4 style="color: teal"><?php echo $recetteData[$g][$i]['nom_recette']; ?></h4></center>
-                            <center>categorie:<h5><b><?php echo $recetteData[$g][$i]['categorie']; ?></b></h5></center>
+                            Crée par <?php echo $getSearchRecetteParNom[$g][$i]['pseudo']; ?>
+                            <center><h4 style="color: teal"><?php echo $getSearchRecetteParNom[$g][$i]['nom_recette']; ?></h4></center>
+                            <center>categorie:<h5><b><?php echo $getSearchRecetteParNom[$g][$i]['categorie']; ?></b></h5></center>
                             <br><br>
                             <b>Ingredient de la recette:</b>
                             <?php 
-                            for ($y=0; $y < count($recetteData[$g]); $y++) { 
-                            if ($recetteID == $recetteData[$g][$y]['id_recette']) {
+                            for ($y=0; $y < count($getSearchRecetteParNom[$g]); $y++) { 
+                            if ($recetteID == $getSearchRecetteParNom[$g][$y]['id_recette']) {
                             ?>
-                                <p><?php echo $recetteData[$g][$y]['quantite']; ?> <?php echo $recetteData[$g][$y]['mesure']; ?> de <?php echo $recetteData[$g][$y]['nom']; ?></p>
+                                <p><?php echo $getSearchRecetteParNom[$g][$y]['quantite']; ?> <?php echo $getSearchRecetteParNom[$g][$y]['mesure']; ?> de <?php echo $getSearchRecetteParNom[$g][$y]['nom']; ?></p>
                             <?php
                                }
                             }

@@ -18,5 +18,6 @@ class NotationsModel extends AbstractModel
     {
         
     }
+
     
 }

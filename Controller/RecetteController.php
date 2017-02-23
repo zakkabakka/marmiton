@@ -100,25 +100,21 @@ class RecetteController extends AbstractController
                 $etape = $key + 1;
 
                 $etapesData = [
-                    // 'recette_id' => $recetteID,
                     'etape' => $etape,
                     'contenu' => $contenuEtape    
                     ];
-// echo "******************* $key *********************************\n";
-// var_dump($etapesData);
                 //Checké si il Add tout les etapes ou juste une
 
                 // !----------------------------------------
                 $etapeID = $EtapeRecetteModel->addEtapeRecette($etapesData);
-// var_dump(compact('etapeID'));
+
 
                 $EtapeHasRecetteData = [
                     'id_etape' => $etapeID,
                     'id_recette' => $recetteID
                 ];
-// var_dump(compact('EtapeHasRecetteData'));
+
                 $EtapeHasRecetteModel->addEtapeHasRecette($EtapeHasRecetteData);
-// var_dump(compact('test'));
 
             }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost
--- Généré le :  Mer 22 Février 2017 à 09:23
+-- Généré le :  Jeu 23 Février 2017 à 19:17
 -- Version du serveur :  5.7.16
 -- Version de PHP :  5.6.27
 
@@ -59,14 +59,26 @@ CREATE TABLE `categorie_has_recettes` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `etapeRecette`
+-- Structure de la table `commentaire`
 --
 
-CREATE TABLE `etapeRecette` (
+CREATE TABLE `commentaire` (
+  `id_commentaire` int(11) NOT NULL,
+  `commentaire` varchar(500) COLLATE utf8_general_mysql500_ci NOT NULL,
+  `id_recette` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `etaperecette`
+--
+
+CREATE TABLE `etaperecette` (
   `id_etape` int(11) NOT NULL,
   `etape` int(11) NOT NULL,
-  `contenu` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `contenu` varchar(500) COLLATE utf8_general_mysql500_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
 -- --------------------------------------------------------
 
@@ -89,6 +101,22 @@ CREATE TABLE `ingredients` (
   `id_ingredient` int(11) NOT NULL,
   `nom` varchar(250) COLLATE utf8_general_mysql500_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+
+--
+-- Contenu de la table `ingredients`
+--
+
+INSERT INTO `ingredients` (`id_ingredient`, `nom`) VALUES
+(1, 'sucre'),
+(2, 'citron'),
+(3, 'farine'),
+(4, 'couscous'),
+(5, 'sel'),
+(6, 'batata'),
+(7, 'zit coco'),
+(8, 'zit zitoun'),
+(9, 'eau'),
+(10, 'pome');
 
 -- --------------------------------------------------------
 
@@ -124,8 +152,7 @@ CREATE TABLE `notations` (
   `notations_id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_recette` int(11) NOT NULL,
-  `notations` int(1) UNSIGNED DEFAULT '0',
-  `commentaire` text COLLATE utf8_general_mysql500_ci
+  `notations` int(1) UNSIGNED DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
 -- --------------------------------------------------------
@@ -184,19 +211,24 @@ ALTER TABLE `categorie_has_recettes`
   ADD KEY `id_recette` (`id_recette`);
 
 --
--- Index pour la table `etapeRecette`
+-- Index pour la table `commentaire`
 --
-ALTER TABLE `etapeRecette`
-  ADD PRIMARY KEY (`id_etape`),
-  ADD UNIQUE KEY `id_etape` (`id_etape`);
+ALTER TABLE `commentaire`
+  ADD PRIMARY KEY (`id_commentaire`),
+  ADD KEY `id_recette` (`id_recette`);
+
+--
+-- Index pour la table `etaperecette`
+--
+ALTER TABLE `etaperecette`
+  ADD PRIMARY KEY (`id_etape`);
 
 --
 -- Index pour la table `etape_has_recette`
 --
 ALTER TABLE `etape_has_recette`
-  ADD UNIQUE KEY `id_etape` (`id_etape`),
-  ADD UNIQUE KEY `id_etape_2` (`id_etape`),
-  ADD UNIQUE KEY `id_recette` (`id_recette`);
+  ADD KEY `id_recette` (`id_recette`),
+  ADD KEY `id_etape` (`id_etape`);
 
 --
 -- Index pour la table `ingredients`
@@ -251,15 +283,20 @@ ALTER TABLE `users`
 ALTER TABLE `categorie`
   MODIFY `id_categorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
--- AUTO_INCREMENT pour la table `etapeRecette`
+-- AUTO_INCREMENT pour la table `commentaire`
 --
-ALTER TABLE `etapeRecette`
-  MODIFY `id_etape` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `commentaire`
+  MODIFY `id_commentaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT pour la table `etaperecette`
+--
+ALTER TABLE `etaperecette`
+  MODIFY `id_etape` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT pour la table `ingredients`
 --
 ALTER TABLE `ingredients`
-  MODIFY `id_ingredient` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ingredient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `mesures`
 --
@@ -274,12 +311,12 @@ ALTER TABLE `notations`
 -- AUTO_INCREMENT pour la table `recette`
 --
 ALTER TABLE `recette`
-  MODIFY `id_recette` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_recette` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Contraintes pour les tables exportées
 --
@@ -292,10 +329,16 @@ ALTER TABLE `categorie_has_recettes`
   ADD CONSTRAINT `categorie_has_recettes_ibfk_2` FOREIGN KEY (`id_categorie`) REFERENCES `categorie` (`id_categorie`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Contraintes pour la table `commentaire`
+--
+ALTER TABLE `commentaire`
+  ADD CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`id_recette`) REFERENCES `recette` (`id_recette`);
+
+--
 -- Contraintes pour la table `etape_has_recette`
 --
 ALTER TABLE `etape_has_recette`
-  ADD CONSTRAINT `etape_has_recette_ibfk_1` FOREIGN KEY (`id_etape`) REFERENCES `etapeRecette` (`id_etape`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `etape_has_recette_ibfk_1` FOREIGN KEY (`id_etape`) REFERENCES `etaperecette` (`id_etape`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `etape_has_recette_ibfk_2` FOREIGN KEY (`id_recette`) REFERENCES `recette` (`id_recette`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

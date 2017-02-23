@@ -14,9 +14,23 @@ class SearchController extends AbstractController
 
     public function recetteAction()
     {
-        //var_dump($_GET['search']);
-        //
-        $this->render('accueil');
+        $searchRecette = new SearchModel;
+        $getSearchRecetteParNom = $searchRecette->getSearchRecetteParNom($_POST['search']);
+        $getSearchRecetteParIngredients = $searchRecette->getSearchRecetteParIngredients($_POST['search']);
+        $getSearchRecetteParCategorie = $searchRecette->getSearchRecetteParCategorie($_POST['search']);
+
+
+        var_dump($getSearchRecetteParNom);
+        var_dump($getSearchRecetteParIngredients);
+        var_dump($getSearchRecetteParCategorie);
+
+        $d['getSearchRecetteParNom'] = $getSearchRecetteParNom;
+        $d['getSearchRecetteParIngredients'] = $getSearchRecetteParIngredients;
+        $d['getSearchRecetteParCategorie'] = $getSearchRecetteParCategorie;
+
+        $this->set($d);
+
+        $this->render('resultRecherche');
     }
 
 }

@@ -1,7 +1,6 @@
 <?php
 
 namespace Marmiton\Controller;
-// use Models\Crud;
 use Marmiton\Core\AbstractController;
 use Marmiton\Models\RecetteModel;
 
@@ -16,17 +15,10 @@ class AccueilController extends AbstractController
     {
         $recettes = new RecetteModel;
         $recette = $recettes->getRecettes();
-        
+
         $d['recetteData'] = $recette;
         $this->set($d);
         $this->render('accueil');
-    }
-
-    public function getRecette()
-    {
-        $recettes = new RecetteModel;
-        $recette = $recettes->getRecettes();
-        // var_dump($recette);
     }
 
 }

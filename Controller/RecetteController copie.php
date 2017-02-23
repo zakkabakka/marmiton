@@ -44,10 +44,6 @@ class RecetteController extends AbstractController
             /* Add Ingredients */
             $ingredientModel = new IngredientModel();
             $checkIngredientsExist = $ingredientModel->checkIngredient();
-            //var_dump($checkIngredientsExist);
-
-            //print_r($checkIngredientsExist);
-            //exit();
 
             foreach ($checkIngredientsExist as $nomIngredientsExist){
                 var_dump($nomIngredientsExist['nom']);
@@ -65,9 +61,6 @@ class RecetteController extends AbstractController
 
                 foreach ($checkIngredientsExist as $nomIngredientsExist){
 
-                    // var_dump($nomIngredientsExist['nom']);
-                    // exit();
-
                     if (!$nomIngredientsExist['nom']) {
 
                         $ingredientID = $ingredientModel->addIngredient($ingredientData);
@@ -83,20 +76,7 @@ class RecetteController extends AbstractController
                 }
 
             }
-
-            /*foreach ($_POST['mesures'] as $key => $mesure) {
-                $quantiteData = [
-                    'recette_id' => $recetteID,
-                    'ingredients_id' => $ingredientID,
-                    'mesure_id' => $mesure,
-                    'quantite' => $_POST["quantites"][$key]
-                ];
-
-                //var_dump($quantiteData);
-                print_r($quantiteData);
-                $QuantiteModel->addQuantite($quantiteData);
-            }*/
-
+            
             //SendMailDeConfirmation
             $sendMail = new SendMail();
 

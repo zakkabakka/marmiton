@@ -20,7 +20,6 @@ class EtapeHasRecetteModel extends AbstractModel
 
     public function addEtapeHasRecette($etapeHasRecetteData)
     {
-        //var_dump($etapeHasRecetteData);
         return $this->insert($etapeHasRecetteData);
     }
 }

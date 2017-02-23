@@ -16,7 +16,7 @@ class DescriptionModel extends AbstractModel
 
     protected function getInsertSqlStatement()
     {
-        return "SELECT * FROM mesures";
+        return "SELECT * FROM test";
     }
     
     public function getRecetteID($id)
@@ -37,7 +37,7 @@ class DescriptionModel extends AbstractModel
         $all = $db->query($sql);
         $allRecettes = $all->fetchAll(\PDO::FETCH_ASSOC);
             //$allRecettes = ;
-        //print_r($allRecettes);
+            //print_r($allRecettes);
 
         return $allRecettes;
     }
