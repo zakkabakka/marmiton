@@ -31,4 +31,18 @@ class MesureModel extends AbstractModel
         return $mesures;
     
     }
+    
+            /*foreach ($_POST['mesures'] as $key => $mesure) {
+                $quantiteData = [
+                    'recette_id' => $recetteID,
+                    'ingredients_id' => $ingredientID,
+                    'mesure_id' => $mesure,
+                    'quantite' => $_POST["quantites"][$key]
+                ];
+
+                //var_dump($quantiteData);
+                print_r($quantiteData);
+                $QuantiteModel->addQuantite($quantiteData);
+            }*/
+
 }

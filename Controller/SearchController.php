@@ -1,9 +1,9 @@
 <?php
 
 namespace Marmiton\Controller;
-// use Models\Crud;
-use Marmiton\Core\AbstractController;
 
+use Marmiton\Core\AbstractController;
+use Marmiton\Models\SearchModel;
 
 class SearchController extends AbstractController
 {
@@ -14,7 +14,7 @@ class SearchController extends AbstractController
 
     public function recetteAction()
     {
-        var_dump($_POST['search']);
+        //var_dump($_GET['search']);
         //
         $this->render('accueil');
     }

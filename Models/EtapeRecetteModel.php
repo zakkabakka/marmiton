@@ -10,12 +10,12 @@ class EtapeRecetteModel extends AbstractModel
 {
     protected function defineTable()
     {
-        $this->table = 'etapeRecette';
+        $this->table = 'etaperecette';
     }
 
     protected function getInsertSqlStatement()
     {
-        return "INSERT INTO etapeRecette(etape, contenu) VALUES (:etape, :contenu)";
+        return "INSERT INTO etaperecette(etape, contenu) VALUES (:etape, :contenu)";
     }
 
     public function addEtapeRecette($etapeRecetteData)

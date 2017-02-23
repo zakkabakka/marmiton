@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8"/>
     <title>Titre</title>
-    <link rel="stylesheet" href="../style.css">
-    <link type="text/css" rel="stylesheet" href="../materialize/css/materialize.min.css" media="screen,projection"/>
+    <link rel="stylesheet" href="../../style.css">
+    <link type="text/css" rel="stylesheet" href="../../materialize/css/materialize.min.css" media="screen,projection"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <header>
@@ -12,18 +12,15 @@
         <nav class="orange darken-3">
             <a href="#">My Marmiton</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Menu</a></li>
-                <li><a href="#">Evenement</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="/">Accueil</a></li>
             </ul>
         </nav>
     </div>
 </header>
 <body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="../materialize/js/materialize.min.js"></script>
-<script type="text/javascript" src="../js.js"></script>
+<script type="text/javascript" src="../../materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="../../js.js"></script>
 
 <?php echo $contente_for_layout; ?>
 

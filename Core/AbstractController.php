@@ -46,10 +46,12 @@ abstract class AbstractController
             require(ROOT.'Views/layout/'.$this->layout.'.php');
         }
     }
+
     function LoadModel($name) {
         require_once(ROOT.'Models/'.strtolower($name).'.php');
         $this->$name = new $name();
     }
+
     protected function getActionParameters()
     {
         if (count($_GET) <= static::COUNT_DEFAULT_PARAMS) {
@@ -63,7 +65,7 @@ abstract class AbstractController
         }
 
         $this->actionParameters = array_values($action_params);
-
+        //var_dump($this->actionParameters);
         return $this->actionParameters;
     }
 }

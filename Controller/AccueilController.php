@@ -16,7 +16,9 @@ class AccueilController extends AbstractController
     {
         $recettes = new RecetteModel;
         $recette = $recettes->getRecettes();
-        print_r($recette);
+        
+        $d['recetteData'] = $recette;
+        $this->set($d);
         $this->render('accueil');
     }
 

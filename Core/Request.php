@@ -21,6 +21,8 @@ class Request
 
     public function dispatch()
     {
+        //var_dump($_GET);
+
         if (isset($_GET['controller'])) {
             try {
                 $this->getController($_GET['controller']);
@@ -29,6 +31,9 @@ class Request
             }
 
             if (isset($_GET['action'])) {
+                //var_dump($_GET['action']);
+                // $actionExplod = explode('/', $_GET['action']);
+                // $action = $actionExplod[0];
                 try {
                  return $this->executeAction($_GET['action']);
                 } catch (\Exception $e) {
@@ -61,10 +66,14 @@ class Request
 
     protected function executeAction($action)
     {
+        //var_dump($action);
         $action = StringTools::toCamelCase($action) . 'Action';
-
+        
         if (method_exists($this->controller, $action)) {
-            return $this->controller->$action();
+
+            $params = (isset($GET['params']))? $GET['params'] : null;
+            // var_dump($GET['params']);
+            return $this->controller->$action($params);
         }
         else {
             throw new \Exception("No Action Found with Name : " . $action . " For Controller with Name : " . $this->controller);
